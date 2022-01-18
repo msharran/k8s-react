@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: frontend
+  labels:
+    app: react
+    tier: frontend
+spec:
+  selector:
+    matchLabels:
+      app: react
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react
+        tier: frontend
+    spec:
+      containers:
+        - name: demo-react-app
+          image: sharran/demo-react-app:1.0.0
+          resources:
+            limits:
+              memory: "250Mi"
+              cpu: "125m"
+          ports:
+            - containerPort: 80
